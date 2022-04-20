@@ -1,0 +1,1 @@
+This cryptocurrency was created for the Blockchain A-Z course.
