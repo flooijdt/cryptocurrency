@@ -102,9 +102,13 @@ class Blockchain:
 
 ### Mining the blockchain
 
-# creating a Web App
+# create a Web App
 app = Flask(__name__)
 
+# create an address on port 5000
+node_address = str(uuid4()).replace("-", "")
+
+# Creates the blockchain
 blockchain = Blockchain()
 
 # via GET method send command to mine a block
