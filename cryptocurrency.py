@@ -161,6 +161,7 @@ def add_transaction():
     return jsonify(response), 201
 
 
+# Connects new nodes
 @app.route("/connect_node/", methods=["POST"])
 def connect_node():
     json = request.get_json()
@@ -174,6 +175,23 @@ def connect_node():
         "total_nodes": list(blockchain.nodes),
     }
     return jsonify(response), 201
+
+
+# Replaces the chain for the largest one, if needed
+@app.route("/replace_chain/", methods=["GET"])
+def replace_chain():
+    is_chain_replaced = blockchain.replace_chain()
+    if is_chain_replaced:
+        response = {
+            "message": "The nodes had different chains. The chain was replaced by the largest one.",
+            "new_chain": blockchain.chain,
+        }
+    else:
+        response = {
+            "message": "The chain is already the largest one.",
+            "actual_chain": blockchain.chain,
+        }
+    return jsonify(response), 200
 
 
 # run the app
